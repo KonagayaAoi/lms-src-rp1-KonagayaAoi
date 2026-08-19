@@ -334,4 +334,23 @@ public class StudentAttendanceService {
 		return messageUtil.getMessage(Constants.PROP_KEY_ATTENDANCE_UPDATE_NOTICE);
 	}
 
+	/**
+	 * Task.25 過去日の未入力チェック
+	 * 
+	 * 今日の日付を基準に、それより前の日付で未入力の勤怠情報がないかを判定する。
+	 * 
+	 * @author Aoi Konagaya - Task.25
+	 * @return 未入力あり：true、未入力なし：false
+	 */
+	public Boolean notEnterCheck() {
+		// Aoi Konagaya - Task.25
+		// 今日の日付を取得（時刻は00:00に丸められる）
+		Date trainingDate = attendanceUtil.getTrainingDate();
+		// 過去日の未入力件数を取得
+		Integer count = tStudentAttendanceMapper.notEnterCount(loginUserDto.getLmsUserId(),
+				Constants.DB_FLG_FALSE, trainingDate);
+		// 未入力数が0より大きい場合はtrue、そうでない場合はfalseを返す
+		return count > 0;
+	}
+
 }

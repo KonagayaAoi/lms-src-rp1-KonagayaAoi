@@ -65,4 +65,19 @@ public interface TStudentAttendanceMapper {
 	 */
 	Boolean update(TStudentAttendance tStudentAttendance);
 
+	/**
+	 * 勤怠情報（受講生入力）未入力件数取得
+	 * 
+	 * 現在日付より前日付で勤怠未入力数を取得する。
+	 * 欠席（status = 1）は未入力の対象外とする。
+	 * 
+	 * @author Aoi Konagaya - Task.25
+	 * @param lmsUserId    LMSユーザID
+	 * @param deleteFlg    削除フラグ
+	 * @param trainingDate 基準日（この日付より前を対象とする）
+	 * @return 未入力件数
+	 */
+	Integer notEnterCount(@Param("lmsUserId") Integer lmsUserId,
+			@Param("deleteFlg") Short deleteFlg, @Param("trainingDate") Date trainingDate);
+
 }

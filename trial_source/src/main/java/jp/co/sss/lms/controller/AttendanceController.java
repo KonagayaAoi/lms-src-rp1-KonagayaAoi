@@ -47,6 +47,11 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
+		// Aoi Konagaya - Task.25
+		// 過去日の未入力チェック
+		Boolean notEnter = studentAttendanceService.notEnterCheck();
+		model.addAttribute("notEnter", notEnter);
+
 		return "attendance/detail";
 	}
 
