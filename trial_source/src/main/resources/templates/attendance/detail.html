@@ -75,40 +75,24 @@
 		</div>
 	</div>
 
-	<!-- Aoi Konagaya - Task.25 -->
-	<!-- 過去日未入力確認ダイアログ（Task.25） -->
-	<div class="modal fade" id="notEnterModal">
-		<div class="modal-dialog modal-dialog-center">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">過去日未入力確認</h4>
-				</div>
-				<div class="modal-body">
-					<div>過去日の勤怠に未入力があります。</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<script type="text/javascript" th:inline="javascript">
 		$(function () {
 			$("#now").text('現在の時刻は　' + getClock() + '　です。');
 			setInterval(function () {
 				$("#now").text('現在の時刻は　' + getClock() + '　です。');
 			}, 1000);
-
-			/*[- 過去日未入力があれば、画面表示時にダイアログを表示（Task.25） -]*/
-			var notEnter = /*[[${notEnter}]]*/ false;
-			if (notEnter) {
-				$('#notEnterModal').modal('show');
-			}
 		});
+
+		// Aoi Konagaya - Task.25
+		// 過去日未入力があれば、画面表示時にブラウザ標準のalertでダイアログを表示する
+		window.onload = function () {
+			/*[- Task.25 -]*/
+			var notEnterFlg = /*[[${notEnter}]]*/ false;
+			if (notEnterFlg) {
+				alert("過去日の勤怠に未入力があります。");
+			}
+		};
+
 		function getClock() {
 			const today = new Date();
 			const hours = ('0' + today.getHours()).slice(-2);
